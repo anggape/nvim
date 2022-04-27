@@ -5,9 +5,9 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 vim.api.nvim_create_autocmd('BufWritePost', {
-    command = 'source <afile> | PackerCompile',
+    command = 'PackerSync',
     group = packer_group,
-    pattern = 'init.lua'
+    pattern = 'plugins.lua'
 })
 
 require('packer').startup(function(use)
