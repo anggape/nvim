@@ -23,4 +23,9 @@ require('packer').startup(function(use)
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
+
+    -- auto pairs
+    use 'windwp/nvim-autopairs'
 end)
+
+require 'nvim-autopairs'.setup {}
