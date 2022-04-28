@@ -38,7 +38,14 @@ require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = { 'nvim-lua/plenary.nvim' }
     }
+
+    -- buffer tab
+    use {
+        'akinsho/bufferline.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' }
+    }
 end)
 
 require 'nvim-autopairs'.setup {}
 require 'nvim-tree'.setup {}
+require 'bufferline'.setup {}
