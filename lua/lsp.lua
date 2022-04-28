@@ -48,5 +48,14 @@ lspconfig.sumneko_lua.setup {
     },
 }
 
-require'lspconfig'.tsserver.setup {}
+lspconfig.tsserver.setup {
+    capabilities = capabilities
+}
 
+local pid = vim.fn.getpid()
+local omnisharp_bin = "/home/ape/.omnisharp/bin/OmniSharp"
+
+lspconfig.omnisharp.setup {
+    capabilities = capabilities,
+    cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) }
+}
