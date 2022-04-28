@@ -59,3 +59,7 @@ lspconfig.omnisharp.setup {
     capabilities = capabilities,
     cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) }
 }
+
+lspconfig.tailwindcss.setup {
+    capabilities = capabilities
+}
