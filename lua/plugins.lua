@@ -26,6 +26,13 @@ require('packer').startup(function(use)
 
     -- auto pairs
     use 'windwp/nvim-autopairs'
+
+    -- file explorer
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = { 'kyazdani42/nvim-web-devicons' }
+    }
 end)
 
 require 'nvim-autopairs'.setup {}
+require 'nvim-tree'.setup {}
