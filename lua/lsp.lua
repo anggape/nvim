@@ -53,11 +53,11 @@ lspconfig.tsserver.setup {
 }
 
 local pid = vim.fn.getpid()
-local omnisharp_bin = "/home/ape/.omnisharp/bin/OmniSharp"
+local omnisharp_bin = "/home/ape/.omnisharp/OmniSharp.exe"
 
 lspconfig.omnisharp.setup {
     capabilities = capabilities,
-    cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) }
+    cmd = { "mono", omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) }
 }
 
 lspconfig.tailwindcss.setup {
