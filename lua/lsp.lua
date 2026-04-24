@@ -28,6 +28,37 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
+    if client:supports_method(m.textDocument_documentHighlight) then
+      local hlgroup = vim.api.nvim_create_augroup('ape-lsp-highlight', {
+        clear = false,
+      })
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        buffer = args.buf,
+        group = hlgroup,
+        callback = vim.lsp.buf.document_highlight,
+      })
+
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        buffer = args.buf,
+        group = hlgroup,
+        callback = vim.lsp.buf.clear_references,
+      })
+
+      vim.api.nvim_create_autocmd('LspDetach', {
+        group = vim.api.nvim_create_augroup(
+          'ape-lsp-highlight-detach',
+          { clear = true }
+        ),
+        callback = function(args1)
+          vim.lsp.buf.clear_references()
+          vim.api.nvim_clear_autocmds({
+            group = hlgroup,
+            buffer = args1.buf,
+          })
+        end,
+      })
+    end
+
     Map:with({ buffer = args.buf }, function()
       if client:supports_method(m.textDocument_formatting) then
         local ft = vim.bo[args.buf].filetype
