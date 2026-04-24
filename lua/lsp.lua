@@ -28,6 +28,27 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
+    if client:supports_method(m.textDocument_signatureHelp) then
+      vim.api.nvim_create_autocmd('InsertCharPre', {
+        buffer = args.buf,
+        callback = function()
+          local char = vim.v.char
+          if char ~= '(' and char ~= ',' then
+            return
+          end
+
+          vim.schedule(function()
+            vim.lsp.buf.signature_help({
+              max_width = 60,
+              max_height = 10,
+              silent = true,
+              focus = false,
+            })
+          end)
+        end,
+      })
+    end
+
     if client:supports_method(m.textDocument_documentHighlight) then
       local hlgroup = vim.api.nvim_create_augroup('ape-lsp-highlight', {
         clear = false,
