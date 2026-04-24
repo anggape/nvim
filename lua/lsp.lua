@@ -1,3 +1,5 @@
+local formatters = {}
+local default_formatters = {}
 local trigger_chars = vim.split(
   ' '
     .. 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -28,7 +30,27 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     Map:with({ buffer = args.buf }, function()
       if client:supports_method(m.textDocument_formatting) then
-        Map.ni('<M-i>', vim.lsp.buf.format)
+        local ft = vim.bo[args.buf].filetype
+
+        formatters[ft] = formatters[ft] or {}
+        formatters[ft][client.name] = true
+
+        local function format()
+          if default_formatters[ft] then
+            return vim.lsp.buf.format({
+              name = default_formatters[ft],
+            })
+          end
+
+          vim.ui.select(vim.tbl_keys(formatters[ft]), {
+            prompt = 'select formatter: ',
+          }, function(item)
+            default_formatters[ft] = item
+            return format()
+          end)
+        end
+
+        Map.ni('<M-i>', format)
       end
 
       if client:supports_method(m.textDocument_hover) then
