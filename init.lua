@@ -3,6 +3,7 @@ require('vim._core.ui2').enable({
   msg = { target = 'msg' },
 })
 
+require('stupid_idea_remove_later')
 require('utils')
 require('options')
 require('keymaps')
