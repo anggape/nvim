@@ -9,7 +9,20 @@ function Rename:on_attach(client, buf)
     return
   end
 
-  Map.ni('<M-r>', vim.lsp.buf.rename, { buffer = buf })
+  Map:with({ buffer = buf }, function()
+    Map.ni('<M-r>', vim.lsp.buf.rename)
+    Map.v('<M-r>', function()
+      vim.ui.input({
+        prompt = 'New Name: ',
+        default = Buf.get_vsel()[1],
+      }, function(input)
+        _ = input and vim.lsp.buf.rename(input)
+      end)
+    end)
+    Map.v('<M-R>', function()
+      vim.lsp.buf.rename(Buf.get_vsel()[1])
+    end)
+  end)
 end
 
 return Rename
