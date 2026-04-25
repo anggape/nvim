@@ -1,0 +1,5 @@
+require('core.colorscheme')
+require('core.options')
+require('core.keymaps')
+require('core.autocmds')
+require('core.stupid_idea_remove_later')

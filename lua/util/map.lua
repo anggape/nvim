@@ -28,4 +28,4 @@ function Map:with(opts, callback)
   self.opts_stack[idx] = nil
 end
 
-_G.Map = Map
+return Map
