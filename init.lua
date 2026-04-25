@@ -6,3 +6,4 @@ require('vim._core.ui2').enable({
 require('util')
 require('core')
 require('lsp')
+require('ui')
