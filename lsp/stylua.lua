@@ -6,4 +6,7 @@ return {
     { '.stylua.toml', 'stylua.toml' },
     { '.git' },
   },
+  preferred = {
+    vim.lsp.protocol.Methods.textDocument_formatting,
+  },
 }

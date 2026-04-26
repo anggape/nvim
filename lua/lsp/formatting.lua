@@ -6,10 +6,18 @@ local Formatting = {
 
 function Formatting._select_formatter(ft, format)
   local self = Formatting
+  local default = self.default_formatters[ft]
 
   vim.ui.select(vim.tbl_keys(self.formatters[ft]), {
-    prompt = 'select formatter: ',
+    prompt = string.format(
+      'change default formatter%s: ',
+      default and string.format(' (active: %s)', default) or ''
+    ),
   }, function(item)
+    if not item then
+      return
+    end
+
     self.default_formatters[ft] = item
     _ = format and self._format()
   end)
@@ -43,6 +51,12 @@ function Formatting:on_attach(client, buf)
 
   self.formatters[ft] = self.formatters[ft] or {}
   self.formatters[ft][client.name] = true
+
+  --- @diagnostic disable-next-line: undefined-field
+  local preferred = client.config.preferred or {}
+  if vim.list_contains(preferred, self.method) then
+    self.default_formatters[ft] = client.name
+  end
 
   Map.ni('<M-i>', self._format, { buffer = buf })
 end
