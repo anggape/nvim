@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd({ 'InsertEnter', 'InsertLeave' }, {
       return
     end
 
-    vim.opt.statuscolumn = args.event == 'InsertLeave' and statuscolumn or ''
-    vim.opt.relativenumber = args.event == 'InsertLeave'
+    vim.wo.relativenumber = args.event == 'InsertLeave'
+    vim.wo.statuscolumn = args.event == 'InsertLeave' and statuscolumn or ''
   end,
 })
