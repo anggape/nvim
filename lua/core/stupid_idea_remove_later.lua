@@ -6,6 +6,10 @@
 local _complete_set = vim.api.nvim__complete_set
 vim.api.nvim__complete_set = function(...)
   local result = _complete_set(...)
+  if not result.winid then
+    return result
+  end
+
   if vim.api.nvim_win_is_valid(result.winid) then
     vim.api.nvim_win_set_config(result.winid, {
       border = vim.o.winborder,
