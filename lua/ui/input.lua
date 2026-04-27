@@ -24,6 +24,10 @@ function Input:__call(opts, on_confirm)
     title = prompt,
   })
 
+  vim.bo[buf].buftype = 'nofile'
+  vim.bo[buf].bufhidden = 'wipe'
+  vim.bo[buf].filetype = 'ape-input'
+
   vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, { default })
   vim.api.nvim_win_call(win, function()
     vim.cmd.startinsert({ bang = true })
