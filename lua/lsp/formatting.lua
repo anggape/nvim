@@ -26,6 +26,11 @@ end
 function Formatting._format()
   local self = Formatting
   local ft = vim.bo.filetype
+  local formatters = vim.tbl_keys(self.formatters[ft])
+
+  if #formatters == 1 then
+    self.default_formatters[ft] = formatters[1]
+  end
 
   if self.default_formatters[ft] then
     return vim.lsp.buf.format({
