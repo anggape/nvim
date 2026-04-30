@@ -30,8 +30,10 @@ vim.api.nvim_create_autocmd('CompleteChanged', {
 
     local width = vim.api.nvim_win_get_width(win)
     local pos = vim.api.nvim_win_get_position(win)
-    local pumpos = vim.fn.pum_getpos()
-    local is_too_wide = (pos[2] - (pumpos.col + pumpos.width)) < 2
+    local pum = vim.fn.pum_getpos()
+    local pum_col = pum.col or 0
+    local pum_width = pum.width or 0
+    local is_too_wide = (pos[2] - (pum_col + pum_width)) < 2
 
     vim.api.nvim_win_set_config(win, {
       border = vim.o.winborder,
