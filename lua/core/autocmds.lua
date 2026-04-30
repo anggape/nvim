@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 local statuscolumn = vim.o.statuscolumn
 vim.api.nvim_create_autocmd({ 'InsertEnter', 'InsertLeave' }, {
   callback = function(args)
-    if vim.bo[args.buf].filetype == 'ape-input' then
+    if vim.bo[args.buf].buftype == 'nofile' then
       return
     end
 
