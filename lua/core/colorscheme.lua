@@ -62,6 +62,9 @@ local kinds = {
 local highlights = {
   FloatBorder = { link = 'NormalFloat' },
   FloatTitle = { link = 'NormalFloat' },
+  CursorLineNr = { link = 'CursorLine' },
+  NonText = { fg = colors.surface0 },
+  SpecialChar = { fg = colors.surface2 },
 }
 
 for key, value in pairs(kinds) do
