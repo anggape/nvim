@@ -61,6 +61,7 @@ local kinds = {
 --- @type table<string, vim.api.keyset.highlight>
 local highlights = {
   FloatBorder = { link = 'NormalFloat' },
+  FloatTitle = { link = 'NormalFloat' },
 }
 
 for key, value in pairs(kinds) do
