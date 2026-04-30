@@ -21,7 +21,7 @@ function Input:__call(opts, on_confirm)
     col = 1,
     width = width,
     height = 1,
-    title = prompt,
+    title = vim.trim(prompt),
   })
 
   vim.bo[buf].buftype = 'nofile'
