@@ -33,6 +33,17 @@ vim.opt.completeopt = {
   'fuzzy',
   'popup',
 }
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = '→ ',
+  trail = '•',
+  extends = '⟩',
+  precedes = '⟨',
+  nbsp = '␣',
+  lead = '·',
+  space = '·',
+  multispace = '•',
+}
 
 vim.diagnostic.config({
   update_in_insert = true,
