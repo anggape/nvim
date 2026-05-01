@@ -24,6 +24,8 @@ function Input:__call(opts, on_confirm)
     title = vim.trim(prompt),
   })
 
+  vim.wo[win].winfixbuf = true
+
   vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, { default })
   vim.api.nvim_win_call(win, function()
     vim.cmd.startinsert({ bang = true })
