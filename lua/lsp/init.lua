@@ -27,20 +27,28 @@ vim.api.nvim_create_autocmd({ 'LspDetach', 'LspAttach' }, {
   end,
 })
 
-for _, config in pairs(vim.lsp.get_configs()) do
-  local executable = config.cmd[1]
-  local name = config.name --[[@as string]]
+--- @type table<string, string[]>
+local servers = { all = {} }
 
-  if vim.fn.executable(executable) == 1 then
-    vim.lsp.enable(name)
+for _, config in pairs(vim.lsp.get_configs()) do
+  local filetypes = config.filetypes
+  if not filetypes then
+    table.insert(servers.all, config.name)
   else
-    vim.notify(
-      string.format(
-        "can't find '%s' executable! %s lsp will be disabled",
-        executable,
-        name
-      ),
-      vim.log.levels.WARN
-    )
+    for _, filetype in pairs(filetypes) do
+      servers[filetype] = servers[filetype] or {}
+      table.insert(servers[filetype], config.name)
+    end
   end
 end
+
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    local filetype = vim.bo[args.buf].filetype
+    for _, server in pairs(servers[filetype] or {}) do
+      if not vim.lsp.is_enabled(server) then
+        vim.lsp.enable(server)
+      end
+    end
+  end,
+})
