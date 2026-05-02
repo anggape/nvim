@@ -65,6 +65,17 @@ local highlights = {
   CursorLineNr = { link = 'CursorLine' },
   NonText = { fg = colors.surface0 },
   SpecialChar = { fg = colors.surface2 },
+
+  ['@ape.statusline.mode'] = {
+    bg = colors.blue,
+    fg = colors.crust,
+    bold = true,
+  },
+  ['@ape.statusline.mode_alt'] = {
+    bg = colors.yellow,
+    fg = colors.crust,
+    bold = true,
+  },
 }
 
 for key, value in pairs(kinds) do

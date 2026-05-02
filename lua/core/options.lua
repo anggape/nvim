@@ -1,5 +1,6 @@
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
+vim.opt.showmode = false
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.number = true
@@ -10,7 +11,9 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
+vim.opt.showcmdloc = 'statusline'
 vim.opt.statuscolumn = '%s%=%{v:virtnum==0?(v:relnum?v:relnum:v:lnum):""} '
+vim.opt.statusline = '%!v:lua.require("ui.statusline")()'
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 vim.opt.winborder = 'single'
