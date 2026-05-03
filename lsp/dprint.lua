@@ -14,6 +14,7 @@ return {
     'rust',
     'roslyn',
     'graphql',
+    'html',
   },
   root_markers = {
     {
