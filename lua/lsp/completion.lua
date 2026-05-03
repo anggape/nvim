@@ -69,7 +69,7 @@ function Completion:on_attach(client, buf)
         vim.tbl_get(item, 'labelDetails', 'detail') or ''
       )
       return {
-        abbr_hlgroup = 'LspKind' .. kind[item.kind],
+        abbr_hlgroup = 'LspKind' .. (kind[item.kind] or 'Text'),
         abbr = self.kinds[kind[item.kind]],
         kind = self._ellipsis(label, 30),
         menu = client.name,
